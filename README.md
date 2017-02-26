@@ -8,6 +8,10 @@ A JS tool intended to be used as userscript to clean up HTML in a rich text edit
 * Replaces non breaking spaces with normal spaces
 * Normalizes some custom Word and LibreOffice Writer formattings (e.g. for unordered lists) to proper HTML
 
+## Limitations
+
+Currently only works with the TYPO3 rich text editor
+
 ## Setup
 
 ### Chrome users

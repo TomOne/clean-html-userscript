@@ -1,7 +1,7 @@
 {
   "name": "clean-html-userscript",
-  "version": "0.0.1-alpha",
-  "description": "Userscript to clean up HTML from a rich text editor",
+  "version": "0.0.2-alpha",
+  "description": "Userscript to clean up HTML from inside rich text editors",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,6 +26,14 @@
   "dependencies": {
     "jquery": "3.1.1",
     "lodash.throttle": "4.1.1",
-    "sanitize-html": "1.14.1"
+    "sanitize-html": "1.14.1",
+    "userscript-header": "0.2.0"
+  },
+  "userscript": {
+    "name": "Clean HTML",
+    "description": "Clean up HTML from inside rich text editors",
+    "author": "TomOne",
+    "match": "*/typo3/*",
+    "run-at": "document-idle"
   }
 }

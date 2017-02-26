@@ -1,3 +1,12 @@
+// ==UserScript==
+// @name Clean HTML
+// @author TomOne
+// @version 0.0.2-alpha
+// @description Clean up HTML from inside rich text editors
+// @match */typo3/*
+// @run-at document-idle
+// ==/UserScript==
+
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -21993,8 +22002,8 @@ const processHTMLFromRichTextEditor = () => {
 const onKeyPress = event => {
   // If the user has pressed `Ctrl + y` or `Cmd + y`
   if ((event.ctrlKey || event.metaKey) && event.key === 'y') {
-    console.log('key pressed')
     processHTMLFromRichTextEditor()
+    console.log('clean-html-userscript: cleaned HTML')
   }
 }
 
@@ -22004,7 +22013,6 @@ const keyDownEvent = (documentContext, handler) => documentContext.addEventListe
 
 // Recursively add the key event listener to all iframes
 const recursiveKeyEventListener = (currentDocument) => {
-  console.log('event registered')
   keyDownEvent(currentDocument, onKeyPress)
   const iframes = currentDocument.querySelectorAll('iframe')
   ;[...iframes].forEach(iframe => {
@@ -22012,6 +22020,8 @@ const recursiveKeyEventListener = (currentDocument) => {
   })
 }
 
+// TODO: use events to check if the document/iFrame has loaded instead
+// of a clumsy setTimeout
 setTimeout(() => {
   recursiveKeyEventListener(document)
 }, 3000)
