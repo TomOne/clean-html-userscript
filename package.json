@@ -1,0 +1,31 @@
+{
+  "name": "clean-html-userscript",
+  "version": "0.0.1-alpha",
+  "description": "Userscript to clean up HTML from a rich text editor",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "webpack --watch",
+    "build": "webpack"
+  },
+  "keywords": [
+    "sanitize-html",
+    "rich-text-editor",
+    "userscript",
+    "clean-html"
+  ],
+  "author": "TomOne",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "3.16.1",
+    "eslint-config-standard": "6.2.1",
+    "eslint-plugin-promise": "3.4.2",
+    "eslint-plugin-standard": "2.0.1",
+    "webpack": "2.2.1"
+  },
+  "dependencies": {
+    "jquery": "3.1.1",
+    "lodash.throttle": "4.1.1",
+    "sanitize-html": "1.14.1"
+  }
+}
