@@ -1,3 +1,12 @@
+// Remove some emtpy tags or those
+// who only contain whitespace
+const exclusiveFilter = frame =>
+  ['a', 'p'].includes(frame.tag) &&
+  !frame.text.trim()
+
+// Replace no break spaces with normal spaces
+const textFilter = text => text.replace(/\u00A0/g, ' ')
+
 const sanitizeHTMLOptions = {
   allowedTags: [
     'h1',
@@ -35,10 +44,8 @@ const sanitizeHTMLOptions = {
   parser: {
     lowerCaseTags: true,
   },
-  // Remove empty a tags
-  exclusiveFilter: frame => frame.tag === 'a' && !frame.text.trim(),
-  // Replace non breaking spaces with normal spaces
-  textFilter: text => text.replace(/\u00A0/g, ' '),
+  exclusiveFilter,
+  textFilter,
   transformTags: {
     'b': 'strong',
     'i': 'em',
