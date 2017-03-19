@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .editor {
+      min-width: 300px;
+      min-height: 300px;
+      background: lightblue;
+    }
+
+    .color {
+      color: red;
+    }
+  </style>
+  <script defer src="../dist/bundle.js"></script>
+</head>
+<body>
+  <h1>Test for clean-html-userscript</h1>
+
+  <section class="example-html">
+    <h2>Example HTML content</h2>
+    <p>This is a paragraph. <span class="color">Colors</span> should be removed on paste.</p>
+    <ul>
+      <li>
+        <p>item 1</p>
+      </li>
+      <li>
+        <p>item 2</p>
+      </li>
+      <li>
+        <p>item 3</p>
+      </li>
+      <li>
+        <p>item 4</p>
+      </li>
+      <li>
+        <p>item 5</p>
+      </li>
+    </ul>
+    <p>The following p tag is empty:</p>
+    <p></p>
+    <p>The follwing p tag contains a no break space</p>
+    <p>&nbsp;</p>
+    <p>Empty a tag: <a href="#"></a></p>
+  </section>
+
+  <div class="html-example">
+  </div>
+  <p class="BulletList">bull 1</p>
+  <p class="BulletList">bull 2</p>
+  <p class="BulletList">bull 3</p>
+  iaeeai
+  <p class="BulletList">bull 4</p>
+  <a href="#">link to hello</a>
+  <p class="BulletList">bull 5</p>
+
+  <div class="rich-html"><em>some</em> <strong>rich</strong> <span class="color">HTML</span></div>
+  <p>HTML text editor for testing, pasting HTML content here should trigger the clean HTML script</p>
+  <div class="editor" contenteditable></div>
+
+  <label for="test-textarea">Textarea, should not trigger the clean HTML script</label>
+  <textarea id="test-textarea" rows="8" cols="80"></textarea>
+
+  <p>This editor field has the “clean-html-userscript-disabled” and should therefore not trigger the clean-html-userscript</p>
+  <div class="editor clean-html-userscript-disabled" contenteditable></div>
+</body>
+</html>

@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name Clean HTML
 // @author TomOne
-// @version 0.0.2-alpha
+// @version 0.0.4-alpha
 // @description Clean up HTML from inside rich text editors
 // @match */typo3/*
-// @run-at document-idle
+// @run-at document-end
 // ==/UserScript==
 
 /******/ (function(modules) { // webpackBootstrap
@@ -72,7 +72,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 68);
+/******/ 	return __webpack_require__(__webpack_require__.s = 72);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -119,8 +119,8 @@ if (typeof Object.create === 'function') {
 
 
 
-var base64 = __webpack_require__(30)
-var ieee754 = __webpack_require__(50)
+var base64 = __webpack_require__(31)
+var ieee754 = __webpack_require__(51)
 var isArray = __webpack_require__(24)
 
 exports.Buffer = Buffer
@@ -1899,7 +1899,7 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 2 */
@@ -2430,7 +2430,7 @@ function isUndefined(arg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var Parser = __webpack_require__(21),
-    DomHandler = __webpack_require__(33);
+    DomHandler = __webpack_require__(34);
 
 function defineProp(name, value){
 	delete module.exports[name];
@@ -2444,22 +2444,22 @@ module.exports = {
 	ElementType: __webpack_require__(4),
 	DomHandler: DomHandler,
 	get FeedHandler(){
-		return defineProp("FeedHandler", __webpack_require__(47));
+		return defineProp("FeedHandler", __webpack_require__(48));
 	},
 	get Stream(){
-		return defineProp("Stream", __webpack_require__(49));
+		return defineProp("Stream", __webpack_require__(50));
 	},
 	get WritableStream(){
 		return defineProp("WritableStream", __webpack_require__(23));
 	},
 	get ProxyHandler(){
-		return defineProp("ProxyHandler", __webpack_require__(48));
+		return defineProp("ProxyHandler", __webpack_require__(49));
 	},
 	get DomUtils(){
-		return defineProp("DomUtils", __webpack_require__(35));
+		return defineProp("DomUtils", __webpack_require__(36));
 	},
 	get CollectingHandler(){
-		return defineProp("CollectingHandler", __webpack_require__(46));
+		return defineProp("CollectingHandler", __webpack_require__(47));
 	},
 	// For legacy support
 	DefaultHandler: DomHandler,
@@ -2687,33 +2687,6 @@ process.umask = function() { return 0; };
 
 /***/ }),
 /* 8 */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || Function("return this")() || (1,eval)("this");
-} catch(e) {
-	// This works if the window reference is available
-	if(typeof window === "object")
-		g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // Copyright Joyent, Inc. and other Node contributors.
@@ -2743,11 +2716,11 @@ var EE = __webpack_require__(5).EventEmitter;
 var inherits = __webpack_require__(0);
 
 inherits(Stream, EE);
-Stream.Readable = __webpack_require__(54);
-Stream.Writable = __webpack_require__(56);
-Stream.Duplex = __webpack_require__(51);
-Stream.Transform = __webpack_require__(55);
-Stream.PassThrough = __webpack_require__(53);
+Stream.Readable = __webpack_require__(57);
+Stream.Writable = __webpack_require__(59);
+Stream.Duplex = __webpack_require__(54);
+Stream.Transform = __webpack_require__(58);
+Stream.PassThrough = __webpack_require__(56);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -2843,6 +2816,33 @@ Stream.prototype.pipe = function(dest, options) {
   // Allow for unix-like usage: A.pipe(B).pipe(C)
   return dest;
 };
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
 
 
 /***/ }),
@@ -2959,7 +2959,7 @@ exports.allocUnsafeSlow = function allocUnsafeSlow(size) {
   return new SlowBuffer(size);
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
 /* 11 */
@@ -15605,7 +15605,7 @@ util.inherits = __webpack_require__(0);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(61)
+  deprecate: __webpack_require__(64)
 };
 /*</replacement>*/
 
@@ -15613,7 +15613,7 @@ var internalUtil = {
 var Stream;
 (function () {
   try {
-    Stream = __webpack_require__(9);
+    Stream = __webpack_require__(8);
   } catch (_) {} finally {
     if (!Stream) Stream = __webpack_require__(5).EventEmitter;
   }
@@ -16130,7 +16130,7 @@ function CorkedRequest(state) {
     }
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(60).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(63).setImmediate))
 
 /***/ }),
 /* 17 */
@@ -16413,7 +16413,7 @@ Object.keys(domLvl1).forEach(function(key) {
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var decodeMap = __webpack_require__(45);
+var decodeMap = __webpack_require__(46);
 
 module.exports = decodeCodePoint;
 
@@ -17832,7 +17832,7 @@ Tokenizer.prototype._emitPartial = function(value){
 module.exports = Stream;
 
 var Parser = __webpack_require__(21),
-    WritableStream = __webpack_require__(9).Writable || __webpack_require__(66).Writable,
+    WritableStream = __webpack_require__(8).Writable || __webpack_require__(70).Writable,
     StringDecoder = __webpack_require__(17).StringDecoder,
     Buffer = __webpack_require__(1).Buffer;
 
@@ -17933,7 +17933,7 @@ var EElistenerCount = function (emitter, type) {
 var Stream;
 (function () {
   try {
-    Stream = __webpack_require__(9);
+    Stream = __webpack_require__(8);
   } catch (_) {} finally {
     if (!Stream) Stream = __webpack_require__(5).EventEmitter;
   }
@@ -17951,7 +17951,7 @@ util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(67);
+var debugUtil = __webpack_require__(71);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -17960,7 +17960,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(52);
+var BufferList = __webpack_require__(55);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -18848,471 +18848,40 @@ function indexOf(xs, x) {
 
 /***/ }),
 /* 27 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(global) {/**
- * lodash (Custom Build) <https://lodash.com/>
- * Build: `lodash modularize exports="npm" -o ./`
- * Copyright jQuery Foundation and other contributors <https://jquery.org/>
- * Released under MIT license <https://lodash.com/license>
- * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
- * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- */
-
-/** Used as the `TypeError` message for "Functions" methods. */
-var FUNC_ERROR_TEXT = 'Expected a function';
-
-/** Used as references for various `Number` constants. */
-var NAN = 0 / 0;
-
-/** `Object#toString` result references. */
-var symbolTag = '[object Symbol]';
-
-/** Used to match leading and trailing whitespace. */
-var reTrim = /^\s+|\s+$/g;
-
-/** Used to detect bad signed hexadecimal string values. */
-var reIsBadHex = /^[-+]0x[0-9a-f]+$/i;
-
-/** Used to detect binary string values. */
-var reIsBinary = /^0b[01]+$/i;
-
-/** Used to detect octal string values. */
-var reIsOctal = /^0o[0-7]+$/i;
-
-/** Built-in method references without a dependency on `root`. */
-var freeParseInt = parseInt;
-
-/** Detect free variable `global` from Node.js. */
-var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
-
-/** Detect free variable `self`. */
-var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = freeGlobal || freeSelf || Function('return this')();
-
-/** Used for built-in method references. */
-var objectProto = Object.prototype;
-
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-var objectToString = objectProto.toString;
-
-/* Built-in method references for those with the same name as other `lodash` methods. */
-var nativeMax = Math.max,
-    nativeMin = Math.min;
-
-/**
- * Gets the timestamp of the number of milliseconds that have elapsed since
- * the Unix epoch (1 January 1970 00:00:00 UTC).
- *
- * @static
- * @memberOf _
- * @since 2.4.0
- * @category Date
- * @returns {number} Returns the timestamp.
- * @example
- *
- * _.defer(function(stamp) {
- *   console.log(_.now() - stamp);
- * }, _.now());
- * // => Logs the number of milliseconds it took for the deferred invocation.
- */
-var now = function() {
-  return root.Date.now();
-};
-
-/**
- * Creates a debounced function that delays invoking `func` until after `wait`
- * milliseconds have elapsed since the last time the debounced function was
- * invoked. The debounced function comes with a `cancel` method to cancel
- * delayed `func` invocations and a `flush` method to immediately invoke them.
- * Provide `options` to indicate whether `func` should be invoked on the
- * leading and/or trailing edge of the `wait` timeout. The `func` is invoked
- * with the last arguments provided to the debounced function. Subsequent
- * calls to the debounced function return the result of the last `func`
- * invocation.
- *
- * **Note:** If `leading` and `trailing` options are `true`, `func` is
- * invoked on the trailing edge of the timeout only if the debounced function
- * is invoked more than once during the `wait` timeout.
- *
- * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
- * until to the next tick, similar to `setTimeout` with a timeout of `0`.
- *
- * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
- * for details over the differences between `_.debounce` and `_.throttle`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to debounce.
- * @param {number} [wait=0] The number of milliseconds to delay.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=false]
- *  Specify invoking on the leading edge of the timeout.
- * @param {number} [options.maxWait]
- *  The maximum time `func` is allowed to be delayed before it's invoked.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new debounced function.
- * @example
- *
- * // Avoid costly calculations while the window size is in flux.
- * jQuery(window).on('resize', _.debounce(calculateLayout, 150));
- *
- * // Invoke `sendMail` when clicked, debouncing subsequent calls.
- * jQuery(element).on('click', _.debounce(sendMail, 300, {
- *   'leading': true,
- *   'trailing': false
- * }));
- *
- * // Ensure `batchLog` is invoked once after 1 second of debounced calls.
- * var debounced = _.debounce(batchLog, 250, { 'maxWait': 1000 });
- * var source = new EventSource('/stream');
- * jQuery(source).on('message', debounced);
- *
- * // Cancel the trailing debounced invocation.
- * jQuery(window).on('popstate', debounced.cancel);
- */
-function debounce(func, wait, options) {
-  var lastArgs,
-      lastThis,
-      maxWait,
-      result,
-      timerId,
-      lastCallTime,
-      lastInvokeTime = 0,
-      leading = false,
-      maxing = false,
-      trailing = true;
-
-  if (typeof func != 'function') {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  wait = toNumber(wait) || 0;
-  if (isObject(options)) {
-    leading = !!options.leading;
-    maxing = 'maxWait' in options;
-    maxWait = maxing ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait;
-    trailing = 'trailing' in options ? !!options.trailing : trailing;
-  }
-
-  function invokeFunc(time) {
-    var args = lastArgs,
-        thisArg = lastThis;
-
-    lastArgs = lastThis = undefined;
-    lastInvokeTime = time;
-    result = func.apply(thisArg, args);
-    return result;
-  }
-
-  function leadingEdge(time) {
-    // Reset any `maxWait` timer.
-    lastInvokeTime = time;
-    // Start the timer for the trailing edge.
-    timerId = setTimeout(timerExpired, wait);
-    // Invoke the leading edge.
-    return leading ? invokeFunc(time) : result;
-  }
-
-  function remainingWait(time) {
-    var timeSinceLastCall = time - lastCallTime,
-        timeSinceLastInvoke = time - lastInvokeTime,
-        result = wait - timeSinceLastCall;
-
-    return maxing ? nativeMin(result, maxWait - timeSinceLastInvoke) : result;
-  }
-
-  function shouldInvoke(time) {
-    var timeSinceLastCall = time - lastCallTime,
-        timeSinceLastInvoke = time - lastInvokeTime;
-
-    // Either this is the first call, activity has stopped and we're at the
-    // trailing edge, the system time has gone backwards and we're treating
-    // it as the trailing edge, or we've hit the `maxWait` limit.
-    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
-      (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait));
-  }
-
-  function timerExpired() {
-    var time = now();
-    if (shouldInvoke(time)) {
-      return trailingEdge(time);
-    }
-    // Restart the timer.
-    timerId = setTimeout(timerExpired, remainingWait(time));
-  }
-
-  function trailingEdge(time) {
-    timerId = undefined;
-
-    // Only invoke if we have `lastArgs` which means `func` has been
-    // debounced at least once.
-    if (trailing && lastArgs) {
-      return invokeFunc(time);
-    }
-    lastArgs = lastThis = undefined;
-    return result;
-  }
-
-  function cancel() {
-    if (timerId !== undefined) {
-      clearTimeout(timerId);
-    }
-    lastInvokeTime = 0;
-    lastArgs = lastCallTime = lastThis = timerId = undefined;
-  }
-
-  function flush() {
-    return timerId === undefined ? result : trailingEdge(now());
-  }
-
-  function debounced() {
-    var time = now(),
-        isInvoking = shouldInvoke(time);
-
-    lastArgs = arguments;
-    lastThis = this;
-    lastCallTime = time;
-
-    if (isInvoking) {
-      if (timerId === undefined) {
-        return leadingEdge(lastCallTime);
-      }
-      if (maxing) {
-        // Handle invocations in a tight loop.
-        timerId = setTimeout(timerExpired, wait);
-        return invokeFunc(lastCallTime);
-      }
-    }
-    if (timerId === undefined) {
-      timerId = setTimeout(timerExpired, wait);
-    }
-    return result;
-  }
-  debounced.cancel = cancel;
-  debounced.flush = flush;
-  return debounced;
+"use strict";
+const HTMLToDocumentFragment = HTMLString => {
+  const templateElement = document.createElement('template')
+  templateElement.innerHTML = HTMLString
+  return templateElement.content
 }
 
-/**
- * Creates a throttled function that only invokes `func` at most once per
- * every `wait` milliseconds. The throttled function comes with a `cancel`
- * method to cancel delayed `func` invocations and a `flush` method to
- * immediately invoke them. Provide `options` to indicate whether `func`
- * should be invoked on the leading and/or trailing edge of the `wait`
- * timeout. The `func` is invoked with the last arguments provided to the
- * throttled function. Subsequent calls to the throttled function return the
- * result of the last `func` invocation.
- *
- * **Note:** If `leading` and `trailing` options are `true`, `func` is
- * invoked on the trailing edge of the timeout only if the throttled function
- * is invoked more than once during the `wait` timeout.
- *
- * If `wait` is `0` and `leading` is `false`, `func` invocation is deferred
- * until to the next tick, similar to `setTimeout` with a timeout of `0`.
- *
- * See [David Corbacho's article](https://css-tricks.com/debouncing-throttling-explained-examples/)
- * for details over the differences between `_.throttle` and `_.debounce`.
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Function
- * @param {Function} func The function to throttle.
- * @param {number} [wait=0] The number of milliseconds to throttle invocations to.
- * @param {Object} [options={}] The options object.
- * @param {boolean} [options.leading=true]
- *  Specify invoking on the leading edge of the timeout.
- * @param {boolean} [options.trailing=true]
- *  Specify invoking on the trailing edge of the timeout.
- * @returns {Function} Returns the new throttled function.
- * @example
- *
- * // Avoid excessively updating the position while scrolling.
- * jQuery(window).on('scroll', _.throttle(updatePosition, 100));
- *
- * // Invoke `renewToken` when the click event is fired, but not more than once every 5 minutes.
- * var throttled = _.throttle(renewToken, 300000, { 'trailing': false });
- * jQuery(element).on('click', throttled);
- *
- * // Cancel the trailing throttled invocation.
- * jQuery(window).on('popstate', throttled.cancel);
- */
-function throttle(func, wait, options) {
-  var leading = true,
-      trailing = true;
+/* harmony default export */ __webpack_exports__["a"] = HTMLToDocumentFragment;
 
-  if (typeof func != 'function') {
-    throw new TypeError(FUNC_ERROR_TEXT);
-  }
-  if (isObject(options)) {
-    leading = 'leading' in options ? !!options.leading : leading;
-    trailing = 'trailing' in options ? !!options.trailing : trailing;
-  }
-  return debounce(func, wait, {
-    'leading': leading,
-    'maxWait': wait,
-    'trailing': trailing
-  });
-}
-
-/**
- * Checks if `value` is the
- * [language type](http://www.ecma-international.org/ecma-262/7.0/#sec-ecmascript-language-types)
- * of `Object`. (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
- *
- * @static
- * @memberOf _
- * @since 0.1.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an object, else `false`.
- * @example
- *
- * _.isObject({});
- * // => true
- *
- * _.isObject([1, 2, 3]);
- * // => true
- *
- * _.isObject(_.noop);
- * // => true
- *
- * _.isObject(null);
- * // => false
- */
-function isObject(value) {
-  var type = typeof value;
-  return !!value && (type == 'object' || type == 'function');
-}
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return !!value && typeof value == 'object';
-}
-
-/**
- * Checks if `value` is classified as a `Symbol` primitive or object.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
- * @example
- *
- * _.isSymbol(Symbol.iterator);
- * // => true
- *
- * _.isSymbol('abc');
- * // => false
- */
-function isSymbol(value) {
-  return typeof value == 'symbol' ||
-    (isObjectLike(value) && objectToString.call(value) == symbolTag);
-}
-
-/**
- * Converts `value` to a number.
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to process.
- * @returns {number} Returns the number.
- * @example
- *
- * _.toNumber(3.2);
- * // => 3.2
- *
- * _.toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * _.toNumber(Infinity);
- * // => Infinity
- *
- * _.toNumber('3.2');
- * // => 3.2
- */
-function toNumber(value) {
-  if (typeof value == 'number') {
-    return value;
-  }
-  if (isSymbol(value)) {
-    return NAN;
-  }
-  if (isObject(value)) {
-    var other = typeof value.valueOf == 'function' ? value.valueOf() : value;
-    value = isObject(other) ? (other + '') : other;
-  }
-  if (typeof value != 'string') {
-    return value === 0 ? value : +value;
-  }
-  value = value.replace(reTrim, '');
-  var isBinary = reIsBinary.test(value);
-  return (isBinary || reIsOctal.test(value))
-    ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
-    : (reIsBadHex.test(value) ? NAN : +value);
-}
-
-module.exports = throttle;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
 
 /***/ }),
 /* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/**
- * Returns the active element via document.activeElement. This also works with nested iframes.
- * @param  {object} currentDocument The document object of the context to check
- * @return {object} The active DOM element
- */
-const getActiveElement = (currentDocument) => {
-  const activeIsIframe = currentDocument.activeElement.tagName === 'IFRAME'
-  // If the active element is not an iframe, it can be returned as end result
-  if (!activeIsIframe) return currentDocument.activeElement
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_notification_css__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_notification_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__assets_notification_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_notification_svg__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_notification_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__assets_notification_svg__);
 
-  // If the active element is an iframe, go one level deeper in finding
-  // the active element
-  return getActiveElement(currentDocument.activeElement.contentDocument)
+
+
+/**
+ * Insert the CSS and the markup for the notification
+ * @return {undefined}
+ */
+const prepareSuccessNotification = () => {
+  document.head.insertAdjacentHTML('beforeend', `<style>${__WEBPACK_IMPORTED_MODULE_0__assets_notification_css___default.a}</style>`)
+  document.body.insertAdjacentHTML('beforeend', __WEBPACK_IMPORTED_MODULE_1__assets_notification_svg___default.a)
 }
 
-/* harmony default export */ __webpack_exports__["a"] = getActiveElement;
+/* harmony default export */ __webpack_exports__["a"] = prepareSuccessNotification;
 
 
 /***/ }),
@@ -19320,12 +18889,13 @@ const getActiveElement = (currentDocument) => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sanitize_html__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__wrap_immediate_siblings_with_tag_js__ = __webpack_require__(65);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sanitize_html_options_js__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__wrap_immediate_siblings_with_tag_js__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__unwrap_elements_js__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sanitize_html_options_js__ = __webpack_require__(67);
 
 
 
@@ -19340,10 +18910,13 @@ const getActiveElement = (currentDocument) => {
  * @return {string} the processed and clean HTML as string
  */
 const processHTML = inputDOMTree => {
-  const $inputDOMTree = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(inputDOMTree)
-
   // Remove p tags that are immediate children of li elements
-  $inputDOMTree.find('li > p').contents().unwrap()
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__unwrap_elements_js__["a" /* default */])(inputDOMTree, 'li > p')
+
+  const tmpElement = document.createElement('div')
+  tmpElement.appendChild(inputDOMTree)
+
+  const $inputDOMTree = __WEBPACK_IMPORTED_MODULE_1_jquery___default()(tmpElement)
 
   __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__wrap_immediate_siblings_with_tag_js__["a" /* default */])({
     $elementsToWrap: $inputDOMTree.find('p.BulletList'),
@@ -19352,7 +18925,7 @@ const processHTML = inputDOMTree => {
   })
 
   const transformedHTMLString = $inputDOMTree.html()
-  const cleanHTML = __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default()(transformedHTMLString, __WEBPACK_IMPORTED_MODULE_3__sanitize_html_options_js__["a" /* default */]).trim()
+  const cleanHTML = __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default()(transformedHTMLString, __WEBPACK_IMPORTED_MODULE_4__sanitize_html_options_js__["a" /* default */]).trim()
 
   return cleanHTML
 }
@@ -19362,6 +18935,29 @@ const processHTML = inputDOMTree => {
 
 /***/ }),
 /* 30 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Triggers the notification for a successful HTML cleanup.
+ * This is currently a green dot in the bottom right corner
+ * of the screen that fades out after a short time.
+ * @return {undefined}
+ */
+const triggerSuccessNotification = () => {
+  const notificationElement = document.querySelector('.clean-html-userscript-notification')
+  notificationElement.classList.add('fade-out')
+  notificationElement.addEventListener(
+    'animationend',
+    () => notificationElement.classList.remove('fade-out')
+  )
+}
+
+/* harmony default export */ __webpack_exports__["a"] = triggerSuccessNotification;
+
+
+/***/ }),
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19482,14 +19078,14 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
   Module dependencies
 */
-var ElementType = __webpack_require__(32);
-var entities = __webpack_require__(42);
+var ElementType = __webpack_require__(33);
+var entities = __webpack_require__(43);
 
 /*
   Boolean Attributes
@@ -19666,7 +19262,7 @@ function renderComment(elem) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports) {
 
 //Types of elements found in the DOM
@@ -19685,14 +19281,14 @@ module.exports = {
 };
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ElementType = __webpack_require__(4);
 
 var re_whitespace = /\s+/g;
 var NodePrototype = __webpack_require__(18);
-var ElementPrototype = __webpack_require__(34);
+var ElementPrototype = __webpack_require__(35);
 
 function DomHandler(callback, options, elementCB){
 	if(typeof callback === "object"){
@@ -19873,7 +19469,7 @@ module.exports = DomHandler;
 
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // DOM-Level-1-compliant structure
@@ -19899,18 +19495,18 @@ Object.keys(domLvl1).forEach(function(key) {
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var DomUtils = module.exports;
 
 [
-	__webpack_require__(40),
 	__webpack_require__(41),
-	__webpack_require__(38),
+	__webpack_require__(42),
 	__webpack_require__(39),
-	__webpack_require__(37),
-	__webpack_require__(36)
+	__webpack_require__(40),
+	__webpack_require__(38),
+	__webpack_require__(37)
 ].forEach(function(ext){
 	Object.keys(ext).forEach(function(key){
 		DomUtils[key] = ext[key].bind(DomUtils);
@@ -19919,7 +19515,7 @@ var DomUtils = module.exports;
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports) {
 
 // removeSubsets
@@ -20066,7 +19662,7 @@ exports.uniqueSort = function(nodes) {
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ElementType = __webpack_require__(4);
@@ -20159,7 +19755,7 @@ exports.getElementsByTagType = function(type, element, recurse, limit){
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports) {
 
 exports.removeElement = function(elem){
@@ -20242,7 +19838,7 @@ exports.prepend = function(elem, prev){
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isTag = __webpack_require__(4).isTag;
@@ -20342,11 +19938,11 @@ function findAll(test, elems){
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ElementType = __webpack_require__(4),
-    getOuterHTML = __webpack_require__(31),
+    getOuterHTML = __webpack_require__(32),
     isTag = ElementType.isTag;
 
 module.exports = {
@@ -20370,7 +19966,7 @@ function getText(elem){
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports) {
 
 var getChildren = exports.getChildren = function(elem){
@@ -20400,11 +19996,11 @@ exports.getName = function(elem){
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var encode = __webpack_require__(44),
-    decode = __webpack_require__(43);
+var encode = __webpack_require__(45),
+    decode = __webpack_require__(44);
 
 exports.decode = function(data, level){
 	return (!level || level <= 0 ? decode.XML : decode.HTML)(data);
@@ -20439,7 +20035,7 @@ exports.escape = encode.escape;
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var entityMap = __webpack_require__(11),
@@ -20516,7 +20112,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inverseXML = getInverseObj(__webpack_require__(12)),
@@ -20595,7 +20191,7 @@ exports.escape = escapeXML;
 
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -20630,7 +20226,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = CollectingHandler;
@@ -20691,7 +20287,7 @@ CollectingHandler.prototype.restart = function(){
 
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var index = __webpack_require__(6),
@@ -20792,7 +20388,7 @@ module.exports = FeedHandler;
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = ProxyHandler;
@@ -20824,7 +20420,7 @@ Object.keys(EVENTS).forEach(function(name){
 });
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = Stream;
@@ -20864,7 +20460,7 @@ Object.keys(EVENTS).forEach(function(name){
 });
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -20954,14 +20550,26 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 51 */
+/* 52 */
+/***/ (function(module, exports) {
+
+module.exports = ".clean-html-userscript-notification {\n  display: none;\n  position: fixed;\n  bottom: 10px;\n  right: 10px;\n  width: 30px;\n  height: 30px;\n  z-index: 100000;\n  pointer-events: none;\n}\n\n.clean-html-userscript-notification-circle {\n  fill: green;\n}\n\n@keyframes fade-out {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n\n.fade-out {\n  display: block;\n  animation-name: fade-out;\n  animation-duration: 1s;\n  animation-fill-mode: forwards;\n}\n"
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports) {
+
+module.exports = "<svg viewBox=\"0 0 120 120\" version=\"1.1\" class=\"clean-html-userscript-notification\"\n  xmlns=\"http://www.w3.org/2000/svg\">\r\n  <circle class=\"clean-html-userscript-notification-circle\" cx=\"60\" cy=\"60\" r=\"60\"/>\n</svg>\r\n"
+
+/***/ }),
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2)
 
 
 /***/ }),
-/* 52 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -21031,19 +20639,19 @@ BufferList.prototype.concat = function (n) {
 };
 
 /***/ }),
-/* 53 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(25)
 
 
 /***/ }),
-/* 54 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var Stream = (function (){
   try {
-    return __webpack_require__(9); // hack to fix a circular dependency issue when used with browserify
+    return __webpack_require__(8); // hack to fix a circular dependency issue when used with browserify
   } catch(_){}
 }());
 exports = module.exports = __webpack_require__(26);
@@ -21061,21 +20669,21 @@ if (!process.browser && process.env.READABLE_STREAM === 'disable' && Stream) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(15)
 
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(16)
 
 
 /***/ }),
-/* 57 */
+/* 60 */
 /***/ (function(module, exports) {
 
 module.exports = function (string) {
@@ -21084,12 +20692,12 @@ module.exports = function (string) {
 
 
 /***/ }),
-/* 58 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var htmlparser = __webpack_require__(6);
-var extend = __webpack_require__(62);
-var quoteRegexp = __webpack_require__(57);
+var extend = __webpack_require__(65);
+var quoteRegexp = __webpack_require__(60);
 
 function each(obj, cb) {
   if (obj) Object.keys(obj).forEach(function (key) {
@@ -21461,7 +21069,7 @@ sanitizeHtml.simpleTransform = function(newTagName, newAttribs, merge) {
 
 
 /***/ }),
-/* 59 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -21651,10 +21259,10 @@ sanitizeHtml.simpleTransform = function(newTagName, newAttribs, merge) {
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(7)))
 
 /***/ }),
-/* 60 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -21707,13 +21315,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(59);
+__webpack_require__(62);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 61 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -21784,10 +21392,10 @@ function config (name) {
   return String(val).toLowerCase() === 'true';
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(8)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 62 */
+/* 65 */
 /***/ (function(module, exports) {
 
 module.exports = extend
@@ -21812,7 +21420,7 @@ function extend() {
 
 
 /***/ }),
-/* 63 */
+/* 66 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21847,10 +21455,19 @@ const isPreviousSiblingIgnoreWhitespace = (element, predicate) => {
 
 
 /***/ }),
-/* 64 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// Remove some emtpy tags or those
+// who only contain whitespace
+const exclusiveFilter = frame =>
+  ['a', 'p'].includes(frame.tag) &&
+  !frame.text.trim()
+
+// Replace no break spaces with normal spaces
+const textFilter = text => text.replace(/\u00A0/g, ' ')
+
 const sanitizeHTMLOptions = {
   allowedTags: [
     'h1',
@@ -21888,10 +21505,8 @@ const sanitizeHTMLOptions = {
   parser: {
     lowerCaseTags: true,
   },
-  // Remove empty a tags
-  exclusiveFilter: frame => frame.tag === 'a' && !frame.text.trim(),
-  // Replace non breaking spaces with normal spaces
-  textFilter: text => text.replace(/\u00A0/g, ' '),
+  exclusiveFilter,
+  textFilter,
   transformTags: {
     'b': 'strong',
     'i': 'em',
@@ -21902,13 +21517,49 @@ const sanitizeHTMLOptions = {
 
 
 /***/ }),
-/* 65 */
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/**
+ * Removes (unwraps) the currently selected element and only leaves the child nodes
+ * @param  {object} wrapperElement The element to remove
+ * @return {undefined}
+ */
+const unwrapElement = wrapperElement => {
+  // place childNodes in document fragment
+  const docFrag = document.createDocumentFragment()
+  while (wrapperElement.firstChild) {
+    const child = wrapperElement.removeChild(wrapperElement.firstChild)
+    docFrag.appendChild(child)
+  }
+
+  // replace wrapperElement with document fragment
+  wrapperElement.parentNode.replaceChild(docFrag, wrapperElement)
+}
+
+/**
+ * Unwraps the selected elements
+ * @param  {object} targetElement The element to use as source
+ * @param  {string} selector CSS selector for the elements to unwrap
+ * @return {undefined}
+ */
+const unwrapElements = (targetElement, selector) => {
+  targetElement.querySelectorAll(selector)
+    .forEach(element => unwrapElement(element))
+}
+
+/* harmony default export */ __webpack_exports__["a"] = unwrapElements;
+
+
+/***/ }),
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__is_previous_sibling_ignore_whitespace_js__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__is_previous_sibling_ignore_whitespace_js__ = __webpack_require__(66);
 
 
 
@@ -21963,27 +21614,27 @@ const wrapImmediateSiblingsWithTag = ({
 
 
 /***/ }),
-/* 66 */
+/* 70 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 67 */
+/* 71 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 68 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_throttle__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_lodash_throttle___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_lodash_throttle__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_process_html_js__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_get_active_element_js__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_process_html_js__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_html_to_document_fragment_js__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_prepare_success_notification_js__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_trigger_success_notification_js__ = __webpack_require__(30);
 
 
 
@@ -21991,39 +21642,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-const processHTMLFromRichTextEditor = () => {
-  const activeElement = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__lib_get_active_element_js__["a" /* default */])(document)
-  if (!activeElement.matches('body[contenteditable=true]')) return false
-  const newHTML = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__lib_process_html_js__["a" /* default */])(activeElement)
-  console.log(newHTML)
-  activeElement.innerHTML = newHTML
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__lib_prepare_success_notification_js__["a" /* default */])()
+
+const pasteEvent = (documentContext, handler) =>
+  documentContext.addEventListener('paste', handler)
+
+const onPaste = event => {
+  const containsHTML = event.clipboardData.types.includes('text/html')
+  const selectorForTargetElement = '[contenteditable]:not(.clean-html-userscript-disabled)'
+  // Only proceed if the target element or one of its ancestors are contenteditable,
+  // otherwise interrupt execution
+  if (!(containsHTML && event.target.closest(selectorForTargetElement))) return
+
+  // Prevent the default pasting of the clipboard content
+  event.preventDefault()
+  const clipboardHTML = event.clipboardData.getData('text/html')
+  const tempElement = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__lib_html_to_document_fragment_js__["a" /* default */])(clipboardHTML)
+  const transformedHTML = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lib_process_html_js__["a" /* default */])(tempElement)
+
+  // Use the correct document context if the active element is an iframe
+  const targetDocument = document.activeElement.tagName === 'IFRAME'
+    ? document.activeElement.contentDocument
+    : document
+
+  targetDocument.execCommand('insertHTML', false, `<html><body>${transformedHTML}</body></html>`)
+  __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__lib_trigger_success_notification_js__["a" /* default */])()
 }
 
-const onKeyPress = event => {
-  // If the user has pressed `Ctrl + y` or `Cmd + y`
-  if ((event.ctrlKey || event.metaKey) && event.key === 'y') {
-    processHTMLFromRichTextEditor()
-    console.log('clean-html-userscript: cleaned HTML')
-  }
-}
-
-const keyDownEvent = (documentContext, handler) => documentContext.addEventListener(
-  'keydown', __WEBPACK_IMPORTED_MODULE_0_lodash_throttle___default()(handler, 500)
-)
-
-// Recursively add the key event listener to all iframes
-const recursiveKeyEventListener = (currentDocument) => {
-  keyDownEvent(currentDocument, onKeyPress)
+// Recursively add the event listener to all iframes if they exist in the document
+const recursivePasteEventListener = (currentDocument) => {
+  pasteEvent(currentDocument, onPaste)
   const iframes = currentDocument.querySelectorAll('iframe')
   ;[...iframes].forEach(iframe => {
-    recursiveKeyEventListener(iframe.contentDocument)
+    recursivePasteEventListener(iframe.contentDocument)
   })
 }
 
 // TODO: use events to check if the document/iFrame has loaded instead
 // of a clumsy setTimeout
 setTimeout(() => {
-  recursiveKeyEventListener(document)
+  recursivePasteEventListener(document)
 }, 3000)
 
 

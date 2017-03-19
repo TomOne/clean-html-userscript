@@ -1,41 +1,48 @@
 'use strict'
 
-import throttle from 'lodash.throttle'
-
 import processHTML from './lib/process-html.js'
-import getActiveElement from './lib/get-active-element.js'
+import HTMLToDocumentFragment from './lib/html-to-document-fragment.js'
+import prepareSuccessNotification from './lib/prepare-success-notification.js'
+import triggerSuccessNotification from './lib/trigger-success-notification.js'
 
-const processHTMLFromRichTextEditor = () => {
-  const activeElement = getActiveElement(document)
-  if (!activeElement.matches('body[contenteditable=true]')) return false
-  const newHTML = processHTML(activeElement)
-  console.log(newHTML)
-  activeElement.innerHTML = newHTML
+prepareSuccessNotification()
+
+const pasteEvent = (documentContext, handler) =>
+  documentContext.addEventListener('paste', handler)
+
+const onPaste = event => {
+  const containsHTML = event.clipboardData.types.includes('text/html')
+  const selectorForTargetElement = '[contenteditable]:not(.clean-html-userscript-disabled)'
+  // Only proceed if the target element or one of its ancestors are contenteditable,
+  // otherwise interrupt execution
+  if (!(containsHTML && event.target.closest(selectorForTargetElement))) return
+
+  // Prevent the default pasting of the clipboard content
+  event.preventDefault()
+  const clipboardHTML = event.clipboardData.getData('text/html')
+  const tempElement = HTMLToDocumentFragment(clipboardHTML)
+  const transformedHTML = processHTML(tempElement)
+
+  // Use the correct document context if the active element is an iframe
+  const targetDocument = document.activeElement.tagName === 'IFRAME'
+    ? document.activeElement.contentDocument
+    : document
+
+  targetDocument.execCommand('insertHTML', false, `<html><body>${transformedHTML}</body></html>`)
+  triggerSuccessNotification()
 }
 
-const onKeyPress = event => {
-  // If the user has pressed `Ctrl + y` or `Cmd + y`
-  if ((event.ctrlKey || event.metaKey) && event.key === 'y') {
-    processHTMLFromRichTextEditor()
-    console.log('clean-html-userscript: cleaned HTML')
-  }
-}
-
-const keyDownEvent = (documentContext, handler) => documentContext.addEventListener(
-  'keydown', throttle(handler, 500)
-)
-
-// Recursively add the key event listener to all iframes
-const recursiveKeyEventListener = (currentDocument) => {
-  keyDownEvent(currentDocument, onKeyPress)
+// Recursively add the event listener to all iframes if they exist in the document
+const recursivePasteEventListener = (currentDocument) => {
+  pasteEvent(currentDocument, onPaste)
   const iframes = currentDocument.querySelectorAll('iframe')
   ;[...iframes].forEach(iframe => {
-    recursiveKeyEventListener(iframe.contentDocument)
+    recursivePasteEventListener(iframe.contentDocument)
   })
 }
 
 // TODO: use events to check if the document/iFrame has loaded instead
 // of a clumsy setTimeout
 setTimeout(() => {
-  recursiveKeyEventListener(document)
+  recursivePasteEventListener(document)
 }, 3000)

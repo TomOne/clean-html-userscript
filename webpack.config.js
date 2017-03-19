@@ -12,6 +12,14 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  module: {
+    rules: [
+      {
+        test: /\.(css|svg)$/,
+        use: 'raw-loader',
+      },
+    ],
+  },
   plugins: [
     new webpack.BannerPlugin({
       banner: userscriptHeader,

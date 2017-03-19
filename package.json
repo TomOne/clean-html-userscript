@@ -1,6 +1,6 @@
 {
   "name": "clean-html-userscript",
-  "version": "0.0.3-alpha",
+  "version": "0.0.4-alpha",
   "description": "Userscript to clean up HTML from inside rich text editors",
   "main": "src/index.js",
   "scripts": {
@@ -21,11 +21,11 @@
     "eslint-config-standard": "6.2.1",
     "eslint-plugin-promise": "3.4.2",
     "eslint-plugin-standard": "2.0.1",
+    "raw-loader": "0.5.1",
     "webpack": "2.2.1"
   },
   "dependencies": {
-    "jquery": "3.1.1",
-    "lodash.throttle": "4.1.1",
+    "jquery": "3.2.0",
     "sanitize-html": "1.14.1",
     "userscript-header": "0.2.0"
   },
@@ -34,6 +34,6 @@
     "description": "Clean up HTML from inside rich text editors",
     "author": "TomOne",
     "match": "*/typo3/*",
-    "run-at": "document-idle"
+    "run-at": "document-end"
   }
 }
