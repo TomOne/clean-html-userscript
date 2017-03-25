@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Clean HTML
 // @author TomOne
-// @version 0.0.4-alpha
+// @version 0.0.5-alpha
 // @description Clean up HTML from inside rich text editors
 // @match */typo3/*
 // @run-at document-end
@@ -72,7 +72,7 @@
 /******/ 	__webpack_require__.p = "";
 
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 72);
+/******/ 	return __webpack_require__(__webpack_require__.s = 73);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -119,8 +119,8 @@ if (typeof Object.create === 'function') {
 
 
 
-var base64 = __webpack_require__(31)
-var ieee754 = __webpack_require__(51)
+var base64 = __webpack_require__(32)
+var ieee754 = __webpack_require__(52)
 var isArray = __webpack_require__(24)
 
 exports.Buffer = Buffer
@@ -2430,7 +2430,7 @@ function isUndefined(arg) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var Parser = __webpack_require__(21),
-    DomHandler = __webpack_require__(34);
+    DomHandler = __webpack_require__(35);
 
 function defineProp(name, value){
 	delete module.exports[name];
@@ -2444,22 +2444,22 @@ module.exports = {
 	ElementType: __webpack_require__(4),
 	DomHandler: DomHandler,
 	get FeedHandler(){
-		return defineProp("FeedHandler", __webpack_require__(48));
+		return defineProp("FeedHandler", __webpack_require__(49));
 	},
 	get Stream(){
-		return defineProp("Stream", __webpack_require__(50));
+		return defineProp("Stream", __webpack_require__(51));
 	},
 	get WritableStream(){
 		return defineProp("WritableStream", __webpack_require__(23));
 	},
 	get ProxyHandler(){
-		return defineProp("ProxyHandler", __webpack_require__(49));
+		return defineProp("ProxyHandler", __webpack_require__(50));
 	},
 	get DomUtils(){
-		return defineProp("DomUtils", __webpack_require__(36));
+		return defineProp("DomUtils", __webpack_require__(37));
 	},
 	get CollectingHandler(){
-		return defineProp("CollectingHandler", __webpack_require__(47));
+		return defineProp("CollectingHandler", __webpack_require__(48));
 	},
 	// For legacy support
 	DefaultHandler: DomHandler,
@@ -2716,11 +2716,11 @@ var EE = __webpack_require__(5).EventEmitter;
 var inherits = __webpack_require__(0);
 
 inherits(Stream, EE);
-Stream.Readable = __webpack_require__(57);
-Stream.Writable = __webpack_require__(59);
-Stream.Duplex = __webpack_require__(54);
-Stream.Transform = __webpack_require__(58);
-Stream.PassThrough = __webpack_require__(56);
+Stream.Readable = __webpack_require__(58);
+Stream.Writable = __webpack_require__(60);
+Stream.Duplex = __webpack_require__(55);
+Stream.Transform = __webpack_require__(59);
+Stream.PassThrough = __webpack_require__(57);
 
 // Backwards-compat with node 0.4.x
 Stream.Stream = Stream;
@@ -15605,7 +15605,7 @@ util.inherits = __webpack_require__(0);
 
 /*<replacement>*/
 var internalUtil = {
-  deprecate: __webpack_require__(64)
+  deprecate: __webpack_require__(65)
 };
 /*</replacement>*/
 
@@ -16130,7 +16130,7 @@ function CorkedRequest(state) {
     }
   };
 }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(63).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7), __webpack_require__(64).setImmediate))
 
 /***/ }),
 /* 17 */
@@ -16413,7 +16413,7 @@ Object.keys(domLvl1).forEach(function(key) {
 /* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var decodeMap = __webpack_require__(46);
+var decodeMap = __webpack_require__(47);
 
 module.exports = decodeCodePoint;
 
@@ -17832,7 +17832,7 @@ Tokenizer.prototype._emitPartial = function(value){
 module.exports = Stream;
 
 var Parser = __webpack_require__(21),
-    WritableStream = __webpack_require__(8).Writable || __webpack_require__(70).Writable,
+    WritableStream = __webpack_require__(8).Writable || __webpack_require__(71).Writable,
     StringDecoder = __webpack_require__(17).StringDecoder,
     Buffer = __webpack_require__(1).Buffer;
 
@@ -17951,7 +17951,7 @@ util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(71);
+var debugUtil = __webpack_require__(72);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -17960,7 +17960,7 @@ if (debugUtil && debugUtil.debuglog) {
 }
 /*</replacement>*/
 
-var BufferList = __webpack_require__(55);
+var BufferList = __webpack_require__(56);
 var StringDecoder;
 
 util.inherits(Readable, Stream);
@@ -18865,9 +18865,44 @@ const HTMLToDocumentFragment = HTMLString => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_notification_css__ = __webpack_require__(52);
+/**
+ * Run a function on every insertion of an iframe on the current document
+ * @param {object} currentDocument The document interface where to start
+ * the Mutation Observer
+ * @param {function} execFunction The function to run. The first function
+ * argument will be the iframe node
+ */
+const onInsertedIframe = (currentDocument, execFunction) => {
+  const observer = new window.MutationObserver(mutations => {
+    mutations.forEach(mutation => {
+      [...mutation.addedNodes]
+        .filter(node => node.tagName === 'IFRAME')
+        .forEach(node => {
+          execFunction(node)
+        })
+    })
+  })
+
+  const observerConfig = {
+    childList: true,
+    subtree: true,
+  }
+
+  const targetNode = currentDocument.body
+  observer.observe(targetNode, observerConfig)
+}
+
+/* harmony default export */ __webpack_exports__["a"] = onInsertedIframe;
+
+
+/***/ }),
+/* 29 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_notification_css__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_notification_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__assets_notification_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_notification_svg__ = __webpack_require__(53);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_notification_svg__ = __webpack_require__(54);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_notification_svg___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__assets_notification_svg__);
 
 
@@ -18885,17 +18920,17 @@ const prepareSuccessNotification = () => {
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sanitize_html__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__wrap_immediate_siblings_with_tag_js__ = __webpack_require__(69);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__unwrap_elements_js__ = __webpack_require__(68);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sanitize_html_options_js__ = __webpack_require__(67);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__wrap_immediate_siblings_with_tag_js__ = __webpack_require__(70);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__unwrap_elements_js__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__sanitize_html_options_js__ = __webpack_require__(68);
 
 
 
@@ -18934,7 +18969,7 @@ const processHTML = inputDOMTree => {
 
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18957,7 +18992,7 @@ const triggerSuccessNotification = () => {
 
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19078,14 +19113,14 @@ function fromByteArray (uint8) {
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
   Module dependencies
 */
-var ElementType = __webpack_require__(33);
-var entities = __webpack_require__(43);
+var ElementType = __webpack_require__(34);
+var entities = __webpack_require__(44);
 
 /*
   Boolean Attributes
@@ -19262,7 +19297,7 @@ function renderComment(elem) {
 
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports) {
 
 //Types of elements found in the DOM
@@ -19281,14 +19316,14 @@ module.exports = {
 };
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ElementType = __webpack_require__(4);
 
 var re_whitespace = /\s+/g;
 var NodePrototype = __webpack_require__(18);
-var ElementPrototype = __webpack_require__(35);
+var ElementPrototype = __webpack_require__(36);
 
 function DomHandler(callback, options, elementCB){
 	if(typeof callback === "object"){
@@ -19469,7 +19504,7 @@ module.exports = DomHandler;
 
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // DOM-Level-1-compliant structure
@@ -19495,18 +19530,18 @@ Object.keys(domLvl1).forEach(function(key) {
 
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var DomUtils = module.exports;
 
 [
-	__webpack_require__(41),
 	__webpack_require__(42),
-	__webpack_require__(39),
+	__webpack_require__(43),
 	__webpack_require__(40),
-	__webpack_require__(38),
-	__webpack_require__(37)
+	__webpack_require__(41),
+	__webpack_require__(39),
+	__webpack_require__(38)
 ].forEach(function(ext){
 	Object.keys(ext).forEach(function(key){
 		DomUtils[key] = ext[key].bind(DomUtils);
@@ -19515,7 +19550,7 @@ var DomUtils = module.exports;
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, exports) {
 
 // removeSubsets
@@ -19662,7 +19697,7 @@ exports.uniqueSort = function(nodes) {
 
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ElementType = __webpack_require__(4);
@@ -19755,7 +19790,7 @@ exports.getElementsByTagType = function(type, element, recurse, limit){
 
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports) {
 
 exports.removeElement = function(elem){
@@ -19838,7 +19873,7 @@ exports.prepend = function(elem, prev){
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var isTag = __webpack_require__(4).isTag;
@@ -19938,11 +19973,11 @@ function findAll(test, elems){
 
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var ElementType = __webpack_require__(4),
-    getOuterHTML = __webpack_require__(32),
+    getOuterHTML = __webpack_require__(33),
     isTag = ElementType.isTag;
 
 module.exports = {
@@ -19966,7 +20001,7 @@ function getText(elem){
 
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports) {
 
 var getChildren = exports.getChildren = function(elem){
@@ -19996,11 +20031,11 @@ exports.getName = function(elem){
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var encode = __webpack_require__(45),
-    decode = __webpack_require__(44);
+var encode = __webpack_require__(46),
+    decode = __webpack_require__(45);
 
 exports.decode = function(data, level){
 	return (!level || level <= 0 ? decode.XML : decode.HTML)(data);
@@ -20035,7 +20070,7 @@ exports.escape = encode.escape;
 
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var entityMap = __webpack_require__(11),
@@ -20112,7 +20147,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var inverseXML = getInverseObj(__webpack_require__(12)),
@@ -20191,7 +20226,7 @@ exports.escape = escapeXML;
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, exports) {
 
 module.exports = {
@@ -20226,7 +20261,7 @@ module.exports = {
 };
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = CollectingHandler;
@@ -20287,7 +20322,7 @@ CollectingHandler.prototype.restart = function(){
 
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var index = __webpack_require__(6),
@@ -20388,7 +20423,7 @@ module.exports = FeedHandler;
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = ProxyHandler;
@@ -20420,7 +20455,7 @@ Object.keys(EVENTS).forEach(function(name){
 });
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = Stream;
@@ -20460,7 +20495,7 @@ Object.keys(EVENTS).forEach(function(name){
 });
 
 /***/ }),
-/* 51 */
+/* 52 */
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -20550,26 +20585,26 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 
 /***/ }),
-/* 52 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = ".clean-html-userscript-notification {\n  display: none;\n  position: fixed;\n  bottom: 10px;\n  right: 10px;\n  width: 30px;\n  height: 30px;\n  z-index: 100000;\n  pointer-events: none;\n}\n\n.clean-html-userscript-notification-circle {\n  fill: green;\n}\n\n@keyframes fade-out {\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n\n.fade-out {\n  display: block;\n  animation-name: fade-out;\n  animation-duration: 1s;\n  animation-fill-mode: forwards;\n}\n"
 
 /***/ }),
-/* 53 */
+/* 54 */
 /***/ (function(module, exports) {
 
 module.exports = "<svg viewBox=\"0 0 120 120\" version=\"1.1\" class=\"clean-html-userscript-notification\"\n  xmlns=\"http://www.w3.org/2000/svg\">\r\n  <circle class=\"clean-html-userscript-notification-circle\" cx=\"60\" cy=\"60\" r=\"60\"/>\n</svg>\r\n"
 
 /***/ }),
-/* 54 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(2)
 
 
 /***/ }),
-/* 55 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -20639,14 +20674,14 @@ BufferList.prototype.concat = function (n) {
 };
 
 /***/ }),
-/* 56 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(25)
 
 
 /***/ }),
-/* 57 */
+/* 58 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {var Stream = (function (){
@@ -20669,21 +20704,21 @@ if (!process.browser && process.env.READABLE_STREAM === 'disable' && Stream) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(7)))
 
 /***/ }),
-/* 58 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(15)
 
 
 /***/ }),
-/* 59 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(16)
 
 
 /***/ }),
-/* 60 */
+/* 61 */
 /***/ (function(module, exports) {
 
 module.exports = function (string) {
@@ -20692,12 +20727,12 @@ module.exports = function (string) {
 
 
 /***/ }),
-/* 61 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var htmlparser = __webpack_require__(6);
-var extend = __webpack_require__(65);
-var quoteRegexp = __webpack_require__(60);
+var extend = __webpack_require__(66);
+var quoteRegexp = __webpack_require__(61);
 
 function each(obj, cb) {
   if (obj) Object.keys(obj).forEach(function (key) {
@@ -21069,7 +21104,7 @@ sanitizeHtml.simpleTransform = function(newTagName, newAttribs, merge) {
 
 
 /***/ }),
-/* 62 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, process) {(function (global, undefined) {
@@ -21262,7 +21297,7 @@ sanitizeHtml.simpleTransform = function(newTagName, newAttribs, merge) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(7)))
 
 /***/ }),
-/* 63 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var apply = Function.prototype.apply;
@@ -21315,13 +21350,13 @@ exports._unrefActive = exports.active = function(item) {
 };
 
 // setimmediate attaches itself to the global object
-__webpack_require__(62);
+__webpack_require__(63);
 exports.setImmediate = setImmediate;
 exports.clearImmediate = clearImmediate;
 
 
 /***/ }),
-/* 64 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {
@@ -21395,7 +21430,7 @@ function config (name) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9)))
 
 /***/ }),
-/* 65 */
+/* 66 */
 /***/ (function(module, exports) {
 
 module.exports = extend
@@ -21420,7 +21455,7 @@ function extend() {
 
 
 /***/ }),
-/* 66 */
+/* 67 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21455,7 +21490,7 @@ const isPreviousSiblingIgnoreWhitespace = (element, predicate) => {
 
 
 /***/ }),
-/* 67 */
+/* 68 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21517,7 +21552,7 @@ const sanitizeHTMLOptions = {
 
 
 /***/ }),
-/* 68 */
+/* 69 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -21553,13 +21588,13 @@ const unwrapElements = (targetElement, selector) => {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jquery___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jquery__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__is_previous_sibling_ignore_whitespace_js__ = __webpack_require__(66);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__is_previous_sibling_ignore_whitespace_js__ = __webpack_require__(67);
 
 
 
@@ -21614,12 +21649,6 @@ const wrapImmediateSiblingsWithTag = ({
 
 
 /***/ }),
-/* 70 */
-/***/ (function(module, exports) {
-
-/* (ignored) */
-
-/***/ }),
 /* 71 */
 /***/ (function(module, exports) {
 
@@ -21627,14 +21656,21 @@ const wrapImmediateSiblingsWithTag = ({
 
 /***/ }),
 /* 72 */
+/***/ (function(module, exports) {
+
+/* (ignored) */
+
+/***/ }),
+/* 73 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_process_html_js__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__lib_process_html_js__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__lib_html_to_document_fragment_js__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_prepare_success_notification_js__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_trigger_success_notification_js__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__lib_prepare_success_notification_js__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__lib_trigger_success_notification_js__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__lib_on_inserted_iframe_js__ = __webpack_require__(28);
 
 
 
@@ -21642,11 +21678,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__lib_prepare_success_notification_js__["a" /* default */])()
 
 const pasteEvent = (documentContext, handler) =>
   documentContext.addEventListener('paste', handler)
 
+// The entire logic that happens on a paste event in a contenteditable
+// element, provided the clipboard’s content is HTML data. Performs the
+// HTML cleanup and programmatic pasting afterwards.
 const onPaste = event => {
   const containsHTML = event.clipboardData.types.includes('text/html')
   const selectorForTargetElement = '[contenteditable]:not(.clean-html-userscript-disabled)'
@@ -21669,20 +21707,23 @@ const onPaste = event => {
   __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_3__lib_trigger_success_notification_js__["a" /* default */])()
 }
 
-// Recursively add the event listener to all iframes if they exist in the document
-const recursivePasteEventListener = (currentDocument) => {
-  pasteEvent(currentDocument, onPaste)
-  const iframes = currentDocument.querySelectorAll('iframe')
-  ;[...iframes].forEach(iframe => {
-    recursivePasteEventListener(iframe.contentDocument)
-  })
-}
+// Insert necessary markup/CSS for the notification
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__lib_prepare_success_notification_js__["a" /* default */])()
 
-// TODO: use events to check if the document/iFrame has loaded instead
-// of a clumsy setTimeout
-setTimeout(() => {
-  recursivePasteEventListener(document)
-}, 3000)
+// Attach the past event to the current document (does not affect iframes)
+pasteEvent(document, onPaste)
+
+// Attach the paste event listener to all iframes loaded
+// prior DOMContentLoaded
+;[...document.querySelectorAll('iframe')].forEach(iframe => {
+  pasteEvent(iframe.contentDocument, onPaste)
+})
+
+// Attach the event listener for pasting on iframes inserted
+// after DOMContentLoaded (using Mutation Observer)
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__lib_on_inserted_iframe_js__["a" /* default */])(document, iframe => {
+  pasteEvent(iframe.contentDocument, onPaste)
+})
 
 
 /***/ })

@@ -4,12 +4,14 @@ import processHTML from './lib/process-html.js'
 import HTMLToDocumentFragment from './lib/html-to-document-fragment.js'
 import prepareSuccessNotification from './lib/prepare-success-notification.js'
 import triggerSuccessNotification from './lib/trigger-success-notification.js'
-
-prepareSuccessNotification()
+import onInsertedIframe from './lib/on-inserted-iframe.js'
 
 const pasteEvent = (documentContext, handler) =>
   documentContext.addEventListener('paste', handler)
 
+// The entire logic that happens on a paste event in a contenteditable
+// element, provided the clipboard’s content is HTML data. Performs the
+// HTML cleanup and programmatic pasting afterwards.
 const onPaste = event => {
   const containsHTML = event.clipboardData.types.includes('text/html')
   const selectorForTargetElement = '[contenteditable]:not(.clean-html-userscript-disabled)'
@@ -32,17 +34,20 @@ const onPaste = event => {
   triggerSuccessNotification()
 }
 
-// Recursively add the event listener to all iframes if they exist in the document
-const recursivePasteEventListener = (currentDocument) => {
-  pasteEvent(currentDocument, onPaste)
-  const iframes = currentDocument.querySelectorAll('iframe')
-  ;[...iframes].forEach(iframe => {
-    recursivePasteEventListener(iframe.contentDocument)
-  })
-}
+// Insert necessary markup/CSS for the notification
+prepareSuccessNotification()
 
-// TODO: use events to check if the document/iFrame has loaded instead
-// of a clumsy setTimeout
-setTimeout(() => {
-  recursivePasteEventListener(document)
-}, 3000)
+// Attach the past event to the current document (does not affect iframes)
+pasteEvent(document, onPaste)
+
+// Attach the paste event listener to all iframes loaded
+// prior DOMContentLoaded
+;[...document.querySelectorAll('iframe')].forEach(iframe => {
+  pasteEvent(iframe.contentDocument, onPaste)
+})
+
+// Attach the event listener for pasting on iframes inserted
+// after DOMContentLoaded (using Mutation Observer)
+onInsertedIframe(document, iframe => {
+  pasteEvent(iframe.contentDocument, onPaste)
+})
