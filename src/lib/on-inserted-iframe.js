@@ -8,7 +8,7 @@
 const onInsertedIframe = (currentDocument, execFunction) => {
   const observer = new window.MutationObserver(mutations => {
     mutations.forEach(mutation => {
-      [...mutation.addedNodes]
+      ;[...mutation.addedNodes]
         .filter(node => node.tagName === 'IFRAME')
         .forEach(node => {
           execFunction(node)
