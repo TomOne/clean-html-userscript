@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Clean HTML
 // @author TomOne
-// @version 0.0.6-alpha
+// @version 0.0.7-alpha
 // @description Clean up HTML from inside rich text editors
 // @match */typo3/*
 // @run-at document-end

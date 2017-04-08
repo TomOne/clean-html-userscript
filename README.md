@@ -11,7 +11,6 @@ A JS tool intended to be used as userscript to clean up HTML in a rich text edit
 ## Limitations
 
 * Currently only works with the TYPO3 rich text editor.
-* Uses a timeout of 3 seconds. If the document content is not loaded within this time, the script will fail to run.
 
 ## Setup
 
