@@ -1,6 +1,6 @@
 {
   "name": "clean-html-userscript",
-  "version": "0.0.5-alpha",
+  "version": "0.0.6-alpha",
   "description": "Userscript to clean up HTML from inside rich text editors",
   "main": "src/index.js",
   "scripts": {

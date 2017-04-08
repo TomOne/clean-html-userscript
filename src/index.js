@@ -22,7 +22,12 @@ const onPaste = event => {
   // Prevent the default pasting of the clipboard content
   event.preventDefault()
   const clipboardHTML = event.clipboardData.getData('text/html')
-  const tempElement = HTMLToDocumentFragment(clipboardHTML)
+  const tempElement = HTMLToDocumentFragment(
+    // Only pick the HTML content inside the <body> tag.
+    // This is necessary because sometimes programs such as MS Word
+    // insert weird characters outside the <body> tag of the clipboard HTML.
+    /<body.*?>([\s\S]*)<\/body>/.exec(clipboardHTML)[1].trim()
+  )
   const transformedHTML = processHTML(tempElement)
 
   // Use the correct document context if the active element is an iframe

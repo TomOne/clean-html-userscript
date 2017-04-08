@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Clean HTML
 // @author TomOne
-// @version 0.0.5-alpha
+// @version 0.0.6-alpha
 // @description Clean up HTML from inside rich text editors
 // @match */typo3/*
 // @run-at document-end
@@ -18875,7 +18875,7 @@ const HTMLToDocumentFragment = HTMLString => {
 const onInsertedIframe = (currentDocument, execFunction) => {
   const observer = new window.MutationObserver(mutations => {
     mutations.forEach(mutation => {
-      [...mutation.addedNodes]
+      ;[...mutation.addedNodes]
         .filter(node => node.tagName === 'IFRAME')
         .forEach(node => {
           execFunction(node)
@@ -21695,7 +21695,12 @@ const onPaste = event => {
   // Prevent the default pasting of the clipboard content
   event.preventDefault()
   const clipboardHTML = event.clipboardData.getData('text/html')
-  const tempElement = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__lib_html_to_document_fragment_js__["a" /* default */])(clipboardHTML)
+  const tempElement = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__lib_html_to_document_fragment_js__["a" /* default */])(
+    // Only pick the HTML content inside the <body> tag.
+    // This is necessary because sometimes programs such as MS Word
+    // insert weird characters outside the <body> tag of the clipboard HTML.
+    /<body.*?>([\s\S]*)<\/body>/.exec(clipboardHTML)[1].trim()
+  )
   const transformedHTML = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__lib_process_html_js__["a" /* default */])(tempElement)
 
   // Use the correct document context if the active element is an iframe
