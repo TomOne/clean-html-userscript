@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Clean HTML
 // @author TomOne
-// @version 0.0.10-alpha
+// @version 0.0.11-alpha
 // @description Clean up HTML from inside rich text editors
 // @match */typo3/*
 // @run-at document-end
@@ -8736,7 +8736,6 @@ const processHTML = inputDOMTree => {
   })
 
   const transformedHTMLString = tmpElement.innerHTML
-  debugger
   const htmlStringCleanedFromMso = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__remove_mso_list_characters_js__["a" /* default */])(transformedHTMLString)
   const cleanHTML = __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default()(htmlStringCleanedFromMso, __WEBPACK_IMPORTED_MODULE_3__sanitize_html_options_js__["a" /* default */]).trim()
 

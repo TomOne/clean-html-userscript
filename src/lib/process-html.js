@@ -31,7 +31,6 @@ const processHTML = inputDOMTree => {
   })
 
   const transformedHTMLString = tmpElement.innerHTML
-  debugger
   const htmlStringCleanedFromMso = removeMsoListCharacters(transformedHTMLString)
   const cleanHTML = sanitizeHTML(htmlStringCleanedFromMso, sanitizeHTMLOptions).trim()
 
