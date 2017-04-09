@@ -1,51 +1,54 @@
-import $ from 'jquery'
-
 import isPreviousSiblingIgnoreWhitespace from './is-previous-sibling-ignore-whitespace.js'
 
 /**
  * Wraps all selected elements that are immediate siblings with
  * the specified tag. This function is impure because it directly mutates
  * DOM elements.
- * @param {Object} options.$elementsToWrap The selected elements with jQuery,
- * e.g. $('.myClass')
- * @param {string} options.wrapperTag The tag to wrap the selected elments with,
- * e.g. '<ul>'.
- * @param {string} options.transformSelectedElementsToTag The tag to transform
- * the selected elements to, e.g. to an <li> element.
+ * @param {Object} options.elementsToWrap The selected DOM elements to wrap
+ * @param {string} options.wrapperTag The tag name to wrap the selected elments with,
+ * e.g. 'ul'.
+ * @param {string} options.transformSelectedElementsToTag The tag name to transform
+ * the selected elements to, e.g. li
  * @return {undefined}
  */
 const wrapImmediateSiblingsWithTag = ({
-  $elementsToWrap,
-  wrapperTag,
+  elementsToWrap,
+  wrapperTagName,
   transformSelectedElementsToTag,
 }) => {
-  const elementsToWrapArray = $elementsToWrap.toArray()
+  const elementsToWrapArray = [...elementsToWrap]
   const hasPrevSiblingToWrapArray = elementsToWrapArray
-    .map(element => isPreviousSiblingIgnoreWhitespace(element, $elementsToWrap))
+    .map(element => isPreviousSiblingIgnoreWhitespace(element, elementsToWrap))
 
-  elementsToWrapArray.reduce(($wrapperOfPrevIteration, element, index) => {
-    const $currentWrapperElement = hasPrevSiblingToWrapArray[index]
-    ? $wrapperOfPrevIteration
-    : $(wrapperTag)
+  elementsToWrapArray.reduce((wrapperOfPrevIteration, element, index) => {
+    const currentWrapperElement = hasPrevSiblingToWrapArray[index]
+    ? wrapperOfPrevIteration
+    : document.createElement(wrapperTagName)
 
-    const $markerElement = $('<div>').insertBefore(element)
-    const $element = $(element)
+    const markerElement = document.createElement('div')
 
-    $element
-      .appendTo($currentWrapperElement)
-      // Replace the tag of the element with a proper `<li>` tag
-      .replaceWith((index, element) => $(transformSelectedElementsToTag)
-        .append($element.contents())
-      )
+    // Insert the marker element before the current element of the iteration
+    element.parentNode.insertBefore(markerElement, element)
+
+    const newElement = document.createElement(transformSelectedElementsToTag)
+
+    // Iterate of the children of the element and append them to the new element.
+    while (element.firstChild) {
+      const child = element.removeChild(element.firstChild)
+      newElement.appendChild(child)
+    }
+    currentWrapperElement.appendChild(newElement)
 
     if (!hasPrevSiblingToWrapArray[index + 1]) {
-      $currentWrapperElement.insertBefore($markerElement)
+      // Insert the current wrapper element before the marker element
+      markerElement.parentNode.insertBefore(currentWrapperElement, markerElement)
     }
 
-    $markerElement.remove()
+    // Remove the temporary marker element as it’s no longer necessary
+    markerElement.parentNode.removeChild(markerElement)
 
-    return $currentWrapperElement
-  }, $(wrapperTag))
+    return currentWrapperElement
+  }, document.createElement(wrapperTagName))
 }
 
 export default wrapImmediateSiblingsWithTag

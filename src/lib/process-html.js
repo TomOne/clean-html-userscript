@@ -1,5 +1,4 @@
 import sanitizeHTML from 'sanitize-html'
-import $ from 'jquery'
 
 import wrapImmediateSiblingsWithTag from './wrap-immediate-siblings-with-tag.js'
 import unwrapElements from './unwrap-elements.js'
@@ -18,15 +17,19 @@ const processHTML = inputDOMTree => {
   const tmpElement = document.createElement('div')
   tmpElement.appendChild(inputDOMTree)
 
-  const $inputDOMTree = $(tmpElement)
-
   wrapImmediateSiblingsWithTag({
-    $elementsToWrap: $inputDOMTree.find('p.BulletList'),
-    wrapperTag: '<ul>',
-    transformSelectedElementsToTag: '<li>',
+    elementsToWrap: tmpElement.querySelectorAll('p.BulletList'),
+    wrapperTagName: 'ul',
+    transformSelectedElementsToTag: 'li',
   })
 
-  const transformedHTMLString = $inputDOMTree.html()
+  wrapImmediateSiblingsWithTag({
+    elementsToWrap: tmpElement.querySelectorAll('p[class^="MsoListParagraph"]'),
+    wrapperTagName: 'ul',
+    transformSelectedElementsToTag: 'li',
+  })
+
+  const transformedHTMLString = tmpElement.innerHTML
   const cleanHTML = sanitizeHTML(transformedHTMLString, sanitizeHTMLOptions).trim()
 
   return cleanHTML

@@ -1,6 +1,6 @@
 {
   "name": "clean-html-userscript",
-  "version": "0.0.8-alpha",
+  "version": "0.0.9-alpha",
   "description": "Userscript to clean up HTML from inside rich text editors",
   "main": "src/index.js",
   "scripts": {
@@ -27,7 +27,6 @@
     "webpack": "2.3.3"
   },
   "dependencies": {
-    "jquery": "3.2.1",
     "sanitize-html": "1.14.1",
     "userscript-header": "0.2.0"
   },
