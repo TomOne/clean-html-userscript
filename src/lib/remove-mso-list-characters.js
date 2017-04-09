@@ -6,6 +6,6 @@
  * @return {string}
  */
 const removeMsoListCharacters = input => input
-  .replace(/<!--\[if !supportLists\]-->[\s\S]*?<!--\[endif\]-->/g)
+  .replace(/<!--\[if !supportLists\]-->[\s\S]*?<!--\[endif\]-->/g, '')
 
 export default removeMsoListCharacters

@@ -11,6 +11,8 @@ A JS tool intended to be used as userscript to clean up HTML in a rich text edit
 ## Limitations
 
 * Currently only works with the TYPO3 rich text editor.
+* All lists copied from a Microsoft Office product will be transformed to an unordered list.
+* Nested lists from Microsoft Office products will be flattened to one level on insertion
 
 ## Setup
 
@@ -38,7 +40,7 @@ A notification in form of a green circle in the bottom right corner of the viewp
 
 ## Browser support
 
-Modern browsers such as Chrome 55+ and Firefox 51+. Other browsers are untested.
+Modern browsers such as Chrome 55+ and Firefox 51+. Other browsers may work too, but are untested.
 
 ## Development
 

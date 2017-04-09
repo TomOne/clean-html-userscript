@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name Clean HTML
 // @author TomOne
-// @version 0.0.9-alpha
+// @version 0.0.10-alpha
 // @description Clean up HTML from inside rich text editors
 // @match */typo3/*
 // @run-at document-end
@@ -7605,7 +7605,7 @@ Tokenizer.prototype._emitPartial = function(value){
 module.exports = Stream;
 
 var Parser = __webpack_require__(20),
-    WritableStream = __webpack_require__(8).Writable || __webpack_require__(72).Writable,
+    WritableStream = __webpack_require__(8).Writable || __webpack_require__(73).Writable,
     StringDecoder = __webpack_require__(16).StringDecoder,
     Buffer = __webpack_require__(1).Buffer;
 
@@ -7724,7 +7724,7 @@ util.inherits = __webpack_require__(0);
 /*</replacement>*/
 
 /*<replacement>*/
-var debugUtil = __webpack_require__(73);
+var debugUtil = __webpack_require__(74);
 var debug = void 0;
 if (debugUtil && debugUtil.debuglog) {
   debug = debugUtil.debuglog('stream');
@@ -8699,9 +8699,11 @@ const prepareSuccessNotification = () => {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html__ = __webpack_require__(61);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_sanitize_html__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrap_immediate_siblings_with_tag_js__ = __webpack_require__(71);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__unwrap_elements_js__ = __webpack_require__(70);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sanitize_html_options_js__ = __webpack_require__(68);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__wrap_immediate_siblings_with_tag_js__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__unwrap_elements_js__ = __webpack_require__(71);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sanitize_html_options_js__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__remove_mso_list_characters_js__ = __webpack_require__(68);
+
 
 
 
@@ -8734,7 +8736,9 @@ const processHTML = inputDOMTree => {
   })
 
   const transformedHTMLString = tmpElement.innerHTML
-  const cleanHTML = __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default()(transformedHTMLString, __WEBPACK_IMPORTED_MODULE_3__sanitize_html_options_js__["a" /* default */]).trim()
+  debugger
+  const htmlStringCleanedFromMso = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__remove_mso_list_characters_js__["a" /* default */])(transformedHTMLString)
+  const cleanHTML = __WEBPACK_IMPORTED_MODULE_0_sanitize_html___default()(htmlStringCleanedFromMso, __WEBPACK_IMPORTED_MODULE_3__sanitize_html_options_js__["a" /* default */]).trim()
 
   return cleanHTML
 }
@@ -11344,6 +11348,24 @@ const isPreviousSiblingIgnoreWhitespace = (element, predicate) => {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/**
+ * Removes the characters that MS Office products put before each list item.
+ * This function is best used before a transformation of lists copied from
+ * MS Office to proper HTML lists (<ul> or <ol>)
+ * @param {string} input The input HTML string
+ * @return {string}
+ */
+const removeMsoListCharacters = input => input
+  .replace(/<!--\[if !supportLists\]-->[\s\S]*?<!--\[endif\]-->/g, '')
+
+/* harmony default export */ __webpack_exports__["a"] = (removeMsoListCharacters);
+
+
+/***/ }),
+/* 69 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 // Remove some emtpy tags or those
 // who only contain whitespace
 const exclusiveFilter = frame =>
@@ -11402,7 +11424,7 @@ const sanitizeHTMLOptions = {
 
 
 /***/ }),
-/* 69 */
+/* 70 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11427,11 +11449,11 @@ const unwrapElement = wrapperElement => {
 
 
 /***/ }),
-/* 70 */
+/* 71 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__unwrap_element_js__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__unwrap_element_js__ = __webpack_require__(70);
 
 
 /**
@@ -11449,7 +11471,7 @@ const unwrapElements = (targetElement, selector) => {
 
 
 /***/ }),
-/* 71 */
+/* 72 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11511,13 +11533,13 @@ const wrapImmediateSiblingsWithTag = ({
 
 
 /***/ }),
-/* 72 */
+/* 73 */
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
-/* 73 */
+/* 74 */
 /***/ (function(module, exports) {
 
 /* (ignored) */

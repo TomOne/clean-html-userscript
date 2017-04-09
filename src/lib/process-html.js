@@ -3,6 +3,7 @@ import sanitizeHTML from 'sanitize-html'
 import wrapImmediateSiblingsWithTag from './wrap-immediate-siblings-with-tag.js'
 import unwrapElements from './unwrap-elements.js'
 import sanitizeHTMLOptions from './sanitize-html-options.js'
+import removeMsoListCharacters from './remove-mso-list-characters.js'
 
 /**
  * Transform the input DOM tree in the desired manner and clean it from
@@ -30,7 +31,9 @@ const processHTML = inputDOMTree => {
   })
 
   const transformedHTMLString = tmpElement.innerHTML
-  const cleanHTML = sanitizeHTML(transformedHTMLString, sanitizeHTMLOptions).trim()
+  debugger
+  const htmlStringCleanedFromMso = removeMsoListCharacters(transformedHTMLString)
+  const cleanHTML = sanitizeHTML(htmlStringCleanedFromMso, sanitizeHTMLOptions).trim()
 
   return cleanHTML
 }
